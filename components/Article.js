@@ -86,6 +86,20 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'How to Bake Amazing Christmas Cookies',
+    date: 'December 2, 2020',
+    firstParagraph: `Buy the groceries. Drive them home. Mix the ingredients. Bake your cookies. Let the cookies cool. Frost them. Pour some milk. Dip the cookies in. Eat them. Be immensely happy. `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -105,6 +119,8 @@ const data = [
 
   */
 
+  /* How to loop over array to access parts of the article using forEach - as in, how do I use output from 
+  forEach and then use them as parameters in a different function? */
   const articleMaker = (article) => {
       const articleContainer = document.createElement('div');
       const title = document.createElement('h2');
@@ -125,16 +141,30 @@ const data = [
      articleDate.classList.add("date");
      button.classList.add("expandButton");
 
+     button.textContent = "+";
+     title.textContent = article.title;
+     articleDate.textContent = article.date;
+     paragraphOne.textContent = article.firstParagraph;
+     paragraphTwo.textContent = article.secondParagraph;
+     paragraphThree.textContent = article.thirdParagraph;
 
+     button.addEventListener("click", () => {
+       articleContainer.classList.toggle("article-open");
+     })
+     
      return articleContainer;
   }
 
-  const callArticleMaker = articleMaker(data);
+ 
   const articleBox = document.querySelector(".articles");
-  articleBox.appendChild(callArticleMaker);
 
-  
-/*
+
+     data.forEach(item => {
+    const callArticleMaker = articleMaker(item); //? would i put a callback function parameter here instead?
+    articleBox.appendChild(callArticleMaker);
+     })
+    
+    /*
 
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
@@ -145,5 +175,4 @@ const data = [
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
 
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
-  Refresh the page to see the new article.
-*/
+  Refresh the page to see the new article. */
